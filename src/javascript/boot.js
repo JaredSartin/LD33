@@ -5,9 +5,9 @@ var opts = {
     // sound: [
     //   {fileName: "music_loop", types: ["ogg", "mp3"], id: "music"},
     // ],
-    data: [
-      "images/play.png"
-    ],
+    // data: [
+    //   "images/play.png"
+    // ],
     // font: [
     //   "FlappyBird",
     // ]
@@ -25,11 +25,4 @@ L.SceneManager.setCurrentScene("preloader");
 L.preloaderScene.on("finished", function() {
   console.log("Starting Game...");
   require("./game/main");
-
-  // @if BUILD='demo'
-  console.log("Trial build");
-  // @endif 
-  // @if BUILD='full'
-  console.log("Full build");
-  // @endif 
 });

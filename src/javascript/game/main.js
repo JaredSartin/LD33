@@ -1,14 +1,10 @@
-var mainMenuScene = require("./scenes/mainMenu");
-var levelSelectScene = require("./scenes/levelSelect");
-var gameScene = require("./scenes/game");
+var runnerScene = require("./scenes/runner");
 
 module.exports = new (L.GameLoop.extend({
 	setup: function() {
 		L.SceneManager.addScene(mainMenuScene);
-		L.SceneManager.addScene(gameScene);
-		L.SceneManager.addScene(levelSelectScene);
 
-		L.SceneManager.setCurrentScene("main-menu");
+		L.SceneManager.setCurrentScene("runner");
 
 		if(L.settings.debug)
 			L.Stats.show();
