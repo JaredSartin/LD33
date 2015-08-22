@@ -2,7 +2,7 @@ var dest = "./build";
 var src = './src';
 
 module.exports = {
-  builds: ["full", "demo"],
+  // builds: ["full", "demo"],
   browserSync: {
     server: {
       // We're serving the src folder as well
@@ -44,16 +44,16 @@ module.exports = {
     extensions: ['.coffee', '.hbs', '.js'],
     // A separate bundle will be generated for each
     // bundle config in the list below
-    bundleConfigs: [{
+    // bundleConfigs: [{
+    //   entries: src + '/javascript/boot.js',
+    //   dest: dest + '/full',
+    //   outputName: 'app.js',
+    //   build: "full"
+    // },
+    {
       entries: src + '/javascript/boot.js',
-      dest: dest + '/full',
+      dest: dest,
       outputName: 'app.js',
-      build: "full"
-    }, {
-      entries: src + '/javascript/boot.js',
-      dest: dest + '/demo',
-      outputName: 'app.js',
-      build: "demo"
     }],
   }
 };
