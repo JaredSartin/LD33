@@ -44,13 +44,12 @@ module.exports = {
     extensions: ['.coffee', '.hbs', '.js'],
     // A separate bundle will be generated for each
     // bundle config in the list below
-    // bundleConfigs: [{
+    bundleConfigs: [{
     //   entries: src + '/javascript/boot.js',
     //   dest: dest + '/full',
     //   outputName: 'app.js',
     //   build: "full"
-    // },
-    {
+    // }, {
       entries: src + '/javascript/boot.js',
       dest: dest,
       outputName: 'app.js',
