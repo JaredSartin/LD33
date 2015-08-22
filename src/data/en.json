@@ -1,0 +1,14 @@
+{
+  "levels": {
+    "mawson": "Mawson\nSea",
+    "ross": "Ross\nSea",
+    "weddell": "Weddell\nSea",
+    "cosmonauts": "Cosmonauts\nSea"
+  },
+  "tutorials": {
+    "level1": {
+      "step1": "These are your krill",
+      "step2": "Fish are one of the many predators\nin the ocean, watch out!"
+    }
+  }
+}
