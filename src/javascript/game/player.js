@@ -10,19 +10,23 @@ module.exports = new (L.Class.create({
 		this.drawable.clear();
 		this.drawable.beginFill(0x627329);
 		this.drawable.drawRect(0,0, 16,16);
-
-		this.velocity = 0;
-		this.landed = false;
-		this.smash = false;
 	},
 
 	setup: function(container, landscaper) {
 		this.container = container;
 		this.landscaper = landscaper;
+		this.reset();
+	},
+
+	reset: function() {
+		this.velocity = 0;
+		this.landed = false;
+		this.smash = false;
 		this.dead = false;
 
 		this.drawable.x = 96;
 		this.drawable.y = 128;
+
 		this.container.addChild(this.drawable);
 	},
 

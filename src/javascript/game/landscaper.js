@@ -23,14 +23,20 @@ module.exports = new (L.Class.create({
 	},
 
 	setup: function(container) {
+		this.container = container;
+		this.reset();
+	},
+
+	reset: function() {
+		// DANGER!
+		// Removes all the things - including the player drawable
+		this.container.removeChildren();
 		this.dist = 0;
-		this.area = 0;
-		this.enemies = [];
-		this.platforms = [];
-		this.blobs = [];
 		this.needPlat = true;
 		this.currentSpeed = 5;
-		this.container = container;
+		this.platforms = [];
+		this.blobs = [];
+
 		this._makeNextPlatform(true);
 	},
 

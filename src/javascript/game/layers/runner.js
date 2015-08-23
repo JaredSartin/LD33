@@ -8,12 +8,20 @@ module.exports = new (L.Layer.extend({
 		this.paused = true;
 		landscaper.setup(this);
 		player.setup(this, landscaper);
+
+		this.reset();
+	},
+
+	reset: function() {
+		landscaper.reset();
+		player.reset();
 		this.shakeTick = 0;
 		this.shakeAmount = 0;
+
+		this.paused = false;
 	},
 
 	onAdd: function() {
-		this.paused = false;
 		L.Input.bindAction("up", "jump");
 		L.Input.bindAction("space", "jump");
 
@@ -28,6 +36,7 @@ module.exports = new (L.Layer.extend({
 			this.shakeTick = 30;
 			this.shakeAmount = 7;
 			this.paused = true;
+			this.emit("endgame");
 		}.bind(this));
 
 		player.on("chomp", function() {

@@ -1,3 +1,4 @@
+var endGameLayer = require("../layers/endGame");
 var hudLayer = require("../layers/hud");
 var runnerLayer = require("../layers/runner");
 
@@ -12,6 +13,16 @@ module.exports = new (L.Scene.extend({
 		this.background.drawRect(0,0, 320,240);
 
 		runnerLayer.hudLayer = hudLayer;
+
+		runnerLayer.on("endgame", function() {
+			endGameLayer.addToScene(this);
+		}.bind(this));
+		endGameLayer.on("retry", function() {
+			endGameLayer.remove();
+
+			runnerLayer.reset();
+			hudLayer.reset();
+		}.bind(this));
 	},
 
 	onSwapIn: function(data) {
