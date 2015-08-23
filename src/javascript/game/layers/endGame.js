@@ -2,7 +2,6 @@ module.exports = new (L.Layer.extend({
 	name: "end-game",
 
 	setup: function() {
-		this.score = 0;
 		this.interactive = true;
 		this.retryText = new this.PIXI.Text("Retry?", {
 			font: "32px silkscreennormal",
