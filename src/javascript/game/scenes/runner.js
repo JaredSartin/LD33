@@ -10,6 +10,8 @@ module.exports = new (L.Scene.extend({
 		this.background.clear();
 		this.background.beginFill(this.backgroundColor || 0xFFFFFF);
 		this.background.drawRect(0,0, 320,240);
+
+		runnerLayer.hudLayer = hudLayer;
 	},
 
 	onSwapIn: function(data) {

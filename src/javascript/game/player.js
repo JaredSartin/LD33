@@ -8,7 +8,7 @@ module.exports = new (L.Class.create({
 		this.smashVel = 10;
 		this.drawable = new L.PIXI.Graphics();
 		this.drawable.clear();
-		this.drawable.beginFill(0x008FFF);
+		this.drawable.beginFill(0x627329);
 		this.drawable.drawRect(0,0, 16,16);
 
 		this.velocity = 0;
@@ -28,11 +28,13 @@ module.exports = new (L.Class.create({
 
 	update: function() {
 		if(this.landed && L.Input.action.jump) {
+			// PARTICLES!
 			this.velocity -= this.jumpVel;
 			this.landed = false;
 		}
 
 		if(!this.landed && L.Input.action.smash) {
+			// PARTICLES!
 			this.velocity += this.smashVel;
 			this.smash = true;
 		}
@@ -53,6 +55,7 @@ module.exports = new (L.Class.create({
 
 		this.landed = false; // pre-empt the collisions - if no collision, then we fell off an edge
 		this._collide(this.drawable, this.landscaper.platforms, this.pCollide.bind(this), true);
+		this._collide(this.drawable, this.landscaper.blobs, this.bCollide.bind(this));
 	},
 
 	pCollide: function(me, platform) {
@@ -62,6 +65,13 @@ module.exports = new (L.Class.create({
 		}
 		this.smash = false;
 		this.landed = true;
+	},
+
+	bCollide: function(me, blob) {
+		if(!blob.dead) {
+			blob.dead = true;
+			this.emit("chomp");
+		}
 	},
 
 	// Temp - L.Utils.collisions is for sprites 

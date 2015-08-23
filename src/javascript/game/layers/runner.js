@@ -29,6 +29,12 @@ module.exports = new (L.Layer.extend({
 			this.shakeAmount = 7;
 			this.paused = true;
 		}.bind(this));
+
+		player.on("chomp", function() {
+			this.shakeTick = 3;
+			this.shakeAmount = 2;
+			this.hudLayer.increaseScore();
+		}.bind(this));
 	},
 
 	onUpdate: function() {

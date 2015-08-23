@@ -2,8 +2,9 @@ module.exports = new (L.Layer.extend({
 	name: "hud",
 
 	setup: function() {
+		this.score = 0;
 		this.interactive = false;
-		this.score = new this.PIXI.Text("0", {
+		this.scoreText = new this.PIXI.Text(this.score, {
 			font: "16px silkscreennormal",
 			fill: "#FFFFFF",
 			align: "left",
@@ -11,12 +12,21 @@ module.exports = new (L.Layer.extend({
 	},
 
 	onAdd: function() {
-		this.addChild(this.score);
-		this.score.position.x = 5;
-		this.score.position.y = 2;
+		this.addChild(this.scoreText);
+		this.scoreText.position.x = 5;
+		this.scoreText.position.y = 2;
 	},
 
 	onUpdate: function() {
-		// this.krillCount.text = this.ocean.krillager.krill.length;
 	},
+
+	increaseScore: function() {
+		this.score++;
+		this.scoreText.text = this.score;
+	},
+
+	decreaseScore: function() {
+		this.score -= 3;
+		this.scoreText.text = this.score;
+	}
 }))();
