@@ -1,5 +1,8 @@
 module.exports = new (L.Class.create({
+	mixins: [L.EventsMixin],
+
 	constructor: function() {
+    L.EventsMixin.call(this);
 		this.gravity = 0.5;
 		this.jumpVel = 20;
 		this.smashVel = 10;
@@ -43,7 +46,10 @@ module.exports = new (L.Class.create({
 
 		this.drawable.y += this.velocity;
 
-		if(this.drawable.y > 320) this.dead = true;
+		if(this.drawable.y > 320) {
+			this.dead = true;
+			this.emit("dead");
+		}
 
 		this.landed = false; // pre-empt the collisions - if no collision, then we fell off an edge
 		this._collide(this.drawable, this.landscaper.platforms, this.pCollide.bind(this), true);
@@ -52,6 +58,7 @@ module.exports = new (L.Class.create({
 	pCollide: function(me, platform) {
 		this.drawable.y = platform.y - this.drawable.height;
 		if(this.smash) {
+			this.emit("smash");
 		}
 		this.smash = false;
 		this.landed = true;
