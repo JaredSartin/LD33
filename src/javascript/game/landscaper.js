@@ -1,7 +1,7 @@
 var PLATCALC = {
 	x: {
-		min: 5,
-		max: 30
+		min: 12,
+		max: 36
 	},
 	y: {
 		min: 0,
@@ -19,15 +19,16 @@ var PLATCALC = {
 
 module.exports = new (L.Class.create({
 	constructor: function() {
+		this.speedRamp = 0.002;
+	},
+
+	setup: function(container) {
 		this.dist = 0;
 		this.area = 0;
 		this.enemies = [];
 		this.platforms = [];
-		this.currentSpeed = 5;
 		this.needPlat = true;
-	},
-
-	setup: function(container) {
+		this.currentSpeed = 5;
 		this.container = container;
 		this._makeNextPlatform(true);
 	},
@@ -50,7 +51,7 @@ module.exports = new (L.Class.create({
 			this.platforms[len].position.x -= this.currentSpeed;
 		}
 
-		// Speed ramp?
+		this.currentSpeed += this.speedRamp;
 	},
 
 	_makeNextPlatform: function(first) {
@@ -68,10 +69,10 @@ module.exports = new (L.Class.create({
 
 			var x = L.Utils.randInt(this.currentSpeed * PLATCALC.x.min, this.currentSpeed * PLATCALC.x.max);
 			// Need to factor in x Dist + drop possibilities!
-			var y = L.Utils.randInt(lastPlat.y - 20, lastPlat.y + 20)
+			var y = L.Utils.randInt(lastPlat.y - 24, lastPlat.y + 36)
 			graphics.drawRect(0,0, w,h);
 			graphics.x = 320 + x;
-			graphics.y = y;
+			graphics.y = L.Utils.clamp(y, 64, 208);
 		}
 		graphics.endFill();
 
