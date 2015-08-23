@@ -107,18 +107,20 @@ module.exports = new (L.Class.create({
 
 	_createBlobs: function(platform) {
 		platform.blobs = [];
-		var count = L.Utils.clamp(Math.floor(platform.width / 48), 0, 8);
-		while(count--) {
-			var graphics = new L.PIXI.Graphics();
-			graphics.clear();
-			graphics.beginFill(0x5B859E);
-			graphics.drawRect(0,0, 8,8);
-			graphics.x = platform.x + L.Utils.randInt(8, platform.width - 16);
-			graphics.y = platform.y - 12;
+		if(L.Utils.randInt(0,2) == 0) {
+			var count = L.Utils.clamp(Math.floor(platform.width / 48), 0, 8);
+			while(count--) {
+				var graphics = new L.PIXI.Graphics();
+				graphics.clear();
+				graphics.beginFill(0x5B859E);
+				graphics.drawRect(0,0, 8,8);
+				graphics.x = platform.x + L.Utils.randInt(8, platform.width - 16);
+				graphics.y = platform.y - 12;
 
-			platform.blobs.push(graphics);
-			this.blobs.push(graphics);
-			this.container.addChild(graphics);
+				platform.blobs.push(graphics);
+				this.blobs.push(graphics);
+				this.container.addChild(graphics);
+			}
 		}
 	}
 }))();

@@ -58,8 +58,15 @@ module.exports = new (L.Class.create({
 		this._collide(this.drawable, this.landscaper.blobs, this.bCollide.bind(this));
 	},
 
-	pCollide: function(me, platform) {
+	pCollide: function(me, platform, side) {
+		if(side !== "bottom") {
+			this.dead = true;
+			this.emit("dead");
+			return;
+		}
+
 		this.drawable.y = platform.y - this.drawable.height;
+
 		if(this.smash) {
 			this.emit("smash");
 		}
@@ -82,9 +89,30 @@ module.exports = new (L.Class.create({
 					 (others[len].x + others[len].width) < me.x ||
 					 others[len].y > (me.y + me.height) ||
 					 (others[len].y + others[len].height) < me.y)) {
-				cb(me, others[len]);
+				cb(me, others[len], this._collisionSide(me, others[len]));
 				if(single) return;
 			}
 		}
+	},
+	
+	_collisionSide: function(me, obj) {
+		var dist = Math.abs((me.y + me.height) - obj.y);
+		var side = "bottom";
+
+		if(dist > Math.abs(me.y - (obj.y + obj.height))) {
+			dist = Math.abs(me.y - (obj.y + obj.height));
+			side = "top";
+		}
+
+		if(dist > Math.abs(me.x - (obj.x + obj.width))) {
+			dist = Math.abs(me.x - (obj.x + obj.width));
+			side = "left";
+		}
+
+		if(dist > Math.abs((me.x + me.width) - obj.x)) {
+			side = "right";
+		}
+
+		return side;
 	}
 }))();
