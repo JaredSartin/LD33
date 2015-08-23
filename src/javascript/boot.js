@@ -8,11 +8,18 @@ var opts = {
     // data: [
     //   "images/play.png"
     // ],
-    // font: [
-    //   "FlappyBird",
-    // ]
+    font: [
+      "silkscreennormal",
+    ]
   },
-  settings: {}
+  settings: {
+    layout: {
+      width: 320,
+      height: 240,
+      orientation: "portrait", // landscape | portrait
+      scaling: "fit", // fit | fill | stretch | none/undefined",
+    }
+  }
 }
 
 // DEFINE LOCALES PRIOR!

@@ -2,7 +2,7 @@ var runnerScene = require("./scenes/runner");
 
 module.exports = new (L.GameLoop.extend({
 	setup: function() {
-		L.SceneManager.addScene(mainMenuScene);
+		L.SceneManager.addScene(runnerScene);
 
 		L.SceneManager.setCurrentScene("runner");
 

@@ -1,28 +1,19 @@
 module.exports = new (L.Layer.extend({
-	name: "runner",
+	name: "hud",
 
 	setup: function() {
 		this.interactive = false;
+		this.score = new this.PIXI.Text("0", {
+			font: "16px silkscreennormal",
+			fill: "#FFFFFF",
+			align: "left",
+		});
 	},
 
-	// prepare: function(oceanLayer) {
-	// 	this.ocean = oceanLayer;
-  //
-	// 	this.krillCount = new this.PIXI.Text("-", {
-	// 		font: "30px Impact",
-	// 		fill: "#FFFFFF",
-	// 		align: "center",
-	// 		stroke: "#000000",
-	// 		strokeThickness: 4,
-	// 		padding: 4
-	// 	});
-	// },
-
 	onAdd: function() {
-		// this.addChild(this.krillCount);
-		// this.krillCount.anchor.y = 1;
-		// this.krillCount.position.x = 44;
-		// this.krillCount.position.y = L.Device.windowHeight - 44;
+		this.addChild(this.score);
+		this.score.position.x = 5;
+		this.score.position.y = 2;
 	},
 
 	onUpdate: function() {

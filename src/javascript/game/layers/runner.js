@@ -1,31 +1,36 @@
+var landscaper = require("../landscaper");
+var player = require("../player");
+
 module.exports = new (L.Layer.extend({
-	name: "hud",
+	name: "runner",
 
 	setup: function() {
-		this.interactive = false;
+		this.paused = true;
+		landscaper.setup(this);
+		player.setup(this, landscaper);
 	},
 
-	// prepare: function(oceanLayer) {
-	// 	this.ocean = oceanLayer;
-  //
-	// 	this.krillCount = new this.PIXI.Text("-", {
-	// 		font: "30px Impact",
-	// 		fill: "#FFFFFF",
-	// 		align: "center",
-	// 		stroke: "#000000",
-	// 		strokeThickness: 4,
-	// 		padding: 4
-	// 	});
-	// },
-
 	onAdd: function() {
-		// this.addChild(this.krillCount);
-		// this.krillCount.anchor.y = 1;
-		// this.krillCount.position.x = 44;
-		// this.krillCount.position.y = L.Device.windowHeight - 44;
+		this.paused = false;
+		L.Input.bindAction("up", "jump");
+		L.Input.bindAction("space", "jump");
+
+		L.Input.bindAction("down", "smash");
+		// bind keys
 	},
 
 	onUpdate: function() {
-		// this.krillCount.text = this.ocean.krillager.krill.length;
+		if(this.paused) return;
+		landscaper.update();
+		player.update();
+		if(player.dead) this.paused = true;
 	},
+
+	onRemove: function() {
+		L.Input.unbindAction("up", "jump");
+		L.Input.unbindAction("space", "jump");
+
+		L.Input.unbindAction("down", "smash");
+		// unbind keys
+	}
 }))();
