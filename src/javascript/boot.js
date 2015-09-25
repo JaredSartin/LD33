@@ -2,12 +2,12 @@ require("./vendor/lge/dist/lge.min.js");
 
 var opts = {
   preload: {
-    // sound: [
+    sound: [
     //   {fileName: "music_loop", types: ["ogg", "mp3"], id: "music"},
-    // ],
-    // data: [
+    ],
+    data: [
     //   "images/play.png"
-    // ],
+    ],
     font: [
       "silkscreennormal",
     ]
@@ -26,10 +26,4 @@ var opts = {
 // Preloaders will kick in here and load the default and current!
 L.Setup(opts);
 
-L.SceneManager.addScene(L.preloaderScene);
-L.SceneManager.setCurrentScene("preloader");
-
-L.preloaderScene.on("finished", function() {
-  console.log("Starting Game...");
-  require("./game/main");
-});
+require("./game/main");

@@ -3,11 +3,15 @@ var runnerScene = require("./scenes/runner");
 module.exports = new (L.GameLoop.extend({
 	setup: function() {
 		L.SceneManager.addScene(runnerScene);
-
 		L.SceneManager.setCurrentScene("runner");
+		// L.SceneManager.addScene(L.preloaderScene);
+		// L.SceneManager.setCurrentScene("preloader");
+    //
+		// L.preloaderScene.on("finished", function() {
+		// 	L.SceneManager.addScene(runnerScene);
+		// 	L.SceneManager.setCurrentScene("runner");
+		// });
 
-		if(L.settings.debug)
-			L.Stats.show();
 	},
 	update: function() {
 		L.SceneManager.updateCurrentScene();
